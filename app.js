@@ -1,13 +1,13 @@
 /* Imports */
 // > Part A: Import `getCountries` from fetch-utils.js
-import { getCountries } from './fetch-utils.js';
+import { getContinents, getCountries } from './fetch-utils.js';
 // > Part B: Import `getContinents` from fetch-utils.js
-import { renderCountry } from './render-utils.js';
+import { renderContinentOption, renderCountry } from './render-utils.js';
 
 /* Get DOM Elements */
 const notificationDisplay = document.getElementById('notification-display');
 const searchForm = document.getElementById('search-form');
-// const continentSelect = document.getElementById('continent-select');
+const continentSelect = document.getElementById('continent-select');
 const countryList = document.getElementById('country-list');
 
 /* State */
@@ -22,11 +22,12 @@ window.addEventListener('load', async () => {
     findCountries();
 
     // > Part B: await the call to get continents to get the response
-
+    const response = await getContinents();
     // > Part B: Assign to state the:
     //      - error,
+    error = response.error;
     //      - data (to the continents variable)
-
+    continents = response.data;
     if (!error) {
         displayContinentOptions();
     }
@@ -35,7 +36,6 @@ window.addEventListener('load', async () => {
 async function findCountries() {
     // > Part A: Call the service function that gets the countries
     const response = await getCountries();
-    console.log(getCountries);
 
     // > Part C: Add the name and continent arguments to getCountries
 
@@ -86,5 +86,7 @@ function displayNotifications() {
 function displayContinentOptions() {
     for (const continent of continents) {
         // > Part B: render and append options to select
+        const option = renderContinentOption(continent);
+        continentSelect.append(option);
     }
 }
