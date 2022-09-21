@@ -12,7 +12,7 @@ const countryList = document.getElementById('country-list');
 
 /* State */
 let error = null;
-// let count = 0;
+let count = 0;
 let continents = [];
 let countries = [];
 
@@ -44,6 +44,7 @@ async function findCountries(name, continent) {
     //      - data (to the countries variable)
     error = response.error;
     countries = response.data;
+    count = response.count;
 
     // > Part D: Assign to state the:
     //      - count (of db records)
@@ -80,6 +81,7 @@ function displayNotifications() {
         notificationDisplay.classList.remove('error');
         // > Part D: Display a message with
         //      - how many items were returned in countries array
+        notificationDisplay.textContent = `showing ${countries.length} of ${count} matching countries`;
         //      - how many total matching countries were in the db
     }
 }
