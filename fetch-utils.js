@@ -15,7 +15,7 @@ export async function getCountries(name, continent) {
 
     if (name) {
         // > Part C: add query for name
-        query = query.ilike('name', `%${name}`);
+        query = query.ilike('name', `%${name}%`);
     }
 
     if (continent) {
